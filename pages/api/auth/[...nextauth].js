@@ -6,12 +6,12 @@ import FacebookProvider from "next-auth/providers/facebook";
 export default NextAuth({
   providers: [
     gitHubProvider({
-      clientId: process.env.client_Id,
-      clientSecret: process.env.client_Secret,
+      clientId: process.env.clientId,
+      clientSecret: process.env.clientSecret,
     }),
     FacebookProvider({
-      clientId: process.env.client_Id_fb,
-      clientSecret: process.env.client_Secret_fb,
+      clientId: process.env.clientIdfb,
+      clientSecret: process.env.clientSecretfb,
     })
     
   ],
