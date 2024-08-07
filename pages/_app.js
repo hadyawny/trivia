@@ -17,7 +17,7 @@ function MyApp({
     <>
       <SessionProvider session={session}>
         <NavBar></NavBar>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </SessionProvider>
     </>
   );
