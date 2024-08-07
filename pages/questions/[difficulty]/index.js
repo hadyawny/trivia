@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import QuestionCard from '../../../components/questionsCard.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { scoreAction, calculateScore } from '../../../redux/store/slices/scoreSlice';
+import { scoreAction, calculateScore, resetScore } from '../../../redux/store/slices/scoreSlice';
 import { CircularProgress, Snackbar, Alert, Stack, Button } from '@mui/material';
 
 const Questions = () => {
@@ -59,16 +59,16 @@ const Questions = () => {
         setShowAlert(false);
     };
 
-    const handlePlayAgain = () => {
+    const handlePlayAgain = async () => {
         window.scrollTo(0, 0);
         
-        const fetchQuestions = async () => {
-            const res = await fetch(`/api/${difficulty}`);
-            const data = await res.json();
-            setQuestions(data);
-        };
-
-        fetchQuestions();
+        // Reset score and selected answers
+        dispatch(resetScore());
+    
+        // Fetch new questions
+        const res = await fetch(`/api/${difficulty}`);
+        const data = await res.json();
+        setQuestions(data);
     };
 
     const handleGoHome = () => {
