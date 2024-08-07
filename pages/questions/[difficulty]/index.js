@@ -72,6 +72,7 @@ const Questions = () => {
     };
 
     const handleGoHome = () => {
+        dispatch(resetScore());
         router.push("/");
     };
 
