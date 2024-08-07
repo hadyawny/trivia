@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Card, CardContent, Typography, Button, Grid } from "@mui/material";
+import React from 'react';
+import { Card, CardContent, Typography, Button, Grid, Stack, Box } from '@mui/material';
 
 const QuestionCard = ({ question, answers, selectedAnswer, onAnswerClick }) => {
   return (
-    <Card sx={{ width: "30vw", marginBottom: 10 }}>
+    <Card sx={{ width: '100%', marginBottom: 2 }}>
       <CardContent>
         <Typography variant="h6" component="div">
           {question}
@@ -13,10 +13,10 @@ const QuestionCard = ({ question, answers, selectedAnswer, onAnswerClick }) => {
             <Grid item xs={12} sm={6} key={index}>
               <Button
                 variant="contained"
-                style={{
-                  backgroundColor: selectedAnswer === answer ? "#009688" : "#3f51b5",
-                }}
                 fullWidth
+                sx={{
+                  backgroundColor: selectedAnswer === answer ? '#009688' : '#3f51b5',
+                }}
                 onClick={() => onAnswerClick(answer)}
               >
                 {answer}
@@ -24,6 +24,11 @@ const QuestionCard = ({ question, answers, selectedAnswer, onAnswerClick }) => {
             </Grid>
           ))}
         </Grid>
+        <Box mt={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            {/* Optional additional actions could go here */}
+          </Stack>
+        </Box>
       </CardContent>
     </Card>
   );
