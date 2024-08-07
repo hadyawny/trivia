@@ -62,10 +62,8 @@ const Questions = () => {
     const handlePlayAgain = async () => {
         window.scrollTo(0, 0);
         
-        // Reset score and selected answers
         dispatch(resetScore());
     
-        // Fetch new questions
         const res = await fetch(`/api/${difficulty}`);
         const data = await res.json();
         setQuestions(data);
