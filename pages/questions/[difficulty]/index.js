@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import QuestionCard from '../../../components/questionsCard.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { scoreAction, calculateScore } from '../../../redux/store/slices/scoreSlice';
-import { CircularProgress, Snackbar, Alert } from '@mui/material';
+import { CircularProgress, Snackbar, Alert, Stack, Button } from '@mui/material';
 
 const Questions = () => {
-    const { query } = useRouter();
+    const router = useRouter();
+    const { query } = router;
     const { difficulty } = query;
     const [questions, setQuestions] = useState([]);
     const [randomQuestions, setRandomQuestions] = useState([]);
@@ -58,6 +59,22 @@ const Questions = () => {
         setShowAlert(false);
     };
 
+    const handlePlayAgain = () => {
+        window.scrollTo(0, 0);
+        
+        const fetchQuestions = async () => {
+            const res = await fetch(`/api/${difficulty}`);
+            const data = await res.json();
+            setQuestions(data);
+        };
+
+        fetchQuestions();
+    };
+
+    const handleGoHome = () => {
+        router.push("/");
+    };
+
     return (
         <div
             style={{
@@ -92,16 +109,29 @@ const Questions = () => {
                 )}
             </div>
             <button
-                style={{
-                    marginTop: '20px',
-                    padding: '10px 20px',
-                    fontSize: '16px',
-                    cursor: 'pointer',
-                }}
+                variant="contained"
+                color="primary"
                 onClick={calculateScoreHandler}
+                style={{ marginTop: '20px' }}
             >
                 Submit
             </button>
+            <Stack direction="row" spacing={2} marginTop={2}>
+                <button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={handlePlayAgain}
+                >
+                    Play Again
+                </button>
+                <button
+                    variant="outlined"
+                    color="default"
+                    onClick={handleGoHome}
+                >
+                    Go Home
+                </button>
+            </Stack>
             <Snackbar 
                 open={showAlert} 
                 autoHideDuration={6000} 
